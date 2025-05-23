@@ -40,6 +40,25 @@ export class SmartAssistantService {
   addAssistantMessage(patientId: number, content: string): void {
     this.addMessage(patientId, 'assistant', content);
   }
+  
+  editUserMessage(patientId: number, message: ChatMessage, newContent: string): void {
+    if (!this.chatHistory.has(patientId)) {
+      return;
+    }
+    
+    const messages = this.chatHistory.get(patientId)!;
+    const index = messages.indexOf(message);
+    
+    if (index !== -1) {
+      // Update the message content
+      messages[index].content = newContent;
+      
+      // If there's a response after this message, remove it so we can get a new response
+      if (index + 1 < messages.length && messages[index + 1].type === 'assistant') {
+        messages.splice(index + 1, 1);
+      }
+    }
+  }
 
   private addMessage(patientId: number, type: 'user' | 'assistant', content: string): void {
     if (!this.chatHistory.has(patientId)) {

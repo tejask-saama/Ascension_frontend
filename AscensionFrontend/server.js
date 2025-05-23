@@ -1,13 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3010;
+const port = 3009;
 
 // Middleware to parse JSON
 app.use(express.json());
 
-// Serve static files from the Angular app
+// Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, 'dist/ascension-frontend')));
+
+// Serve node_modules for any dependencies
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // Sample patient data
 const patients = [
@@ -388,6 +391,11 @@ Lactic 5.2 (critical on 2/26, not repeated)`;
   }
   
   res.json({ answer });
+});
+
+// Serve the demo.html file at the root URL
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'demo.html'));
 });
 
 // Catch all other routes and return the Angular app

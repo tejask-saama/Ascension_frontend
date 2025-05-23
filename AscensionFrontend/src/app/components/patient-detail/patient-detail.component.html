@@ -1,6 +1,11 @@
 <div class="detail-container">
   <div *ngIf="loading" class="loading-spinner">
-    Loading patient details...
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+    <p>Loading patient details...</p>
   </div>
   
   <div *ngIf="error" class="error-message">
@@ -35,15 +40,15 @@
       <section class="section">
         <h3 class="section-header">
           BACKGROUND
-          <button class="btn-edit"><i class="fas fa-edit"></i> Edit</button>
+          <i class="fas fa-edit edit-icon" (click)="editSection('background', $event)"></i>
         </h3>
         <div class="section-content">
           <div class="suggestions-panel">
-            <h4>
+            <h4 (click)="toggleSuggestions('background')">
               <i class="fas fa-lightbulb"></i> Suggestions
-              <i class="fas fa-chevron-down"></i>
+              <i class="fas" [ngClass]="expandedSuggestions.background ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </h4>
-            <div class="suggestions-content">
+            <div class="suggestions-content" [ngClass]="{'expanded': expandedSuggestions.background}">
               <div class="suggestion-item">
                 Add information about patient's allergies
               </div>
@@ -73,15 +78,14 @@
       <section class="section">
         <h3 class="section-header">
           ASSESSMENT
-          <button class="btn-edit"><i class="fas fa-edit"></i> Edit</button>
         </h3>
         <div class="section-content">
           <div class="suggestions-panel">
-            <h4>
+            <h4 (click)="toggleSuggestions('assessment')">
               <i class="fas fa-lightbulb"></i> Suggestions
-              <i class="fas fa-chevron-down"></i>
+              <i class="fas" [ngClass]="expandedSuggestions.assessment ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </h4>
-            <div class="suggestions-content">
+            <div class="suggestions-content" [ngClass]="{'expanded': expandedSuggestions.assessment}">
               <div class="suggestion-item">
                 Update vital signs
               </div>
@@ -191,15 +195,15 @@
       <section class="section">
         <h3 class="section-header">
           RECOMMENDATIONS
-          <button class="btn-edit"><i class="fas fa-edit"></i> Edit</button>
+          <i class="fas fa-edit edit-icon" (click)="editSection('recommendations', $event)"></i>
         </h3>
         <div class="section-content">
           <div class="suggestions-panel">
-            <h4>
+            <h4 (click)="toggleSuggestions('recommendations')">
               <i class="fas fa-lightbulb"></i> Suggestions
-              <i class="fas fa-chevron-down"></i>
+              <i class="fas" [ngClass]="expandedSuggestions.recommendations ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </h4>
-            <div class="suggestions-content">
+            <div class="suggestions-content" [ngClass]="{'expanded': expandedSuggestions.recommendations}">
               <div class="suggestion-item">
                 Update shift goals
               </div>
@@ -230,7 +234,7 @@
       <section class="section">
         <h3 class="section-header">
           NURSES' NOTES
-          <button class="btn-edit"><i class="fas fa-edit"></i> Edit</button>
+          <i class="fas fa-plus add-note-icon" (click)="addNewNote($event)"></i>
         </h3>
         <div class="section-content">
           <div class="notes-list">
@@ -242,9 +246,7 @@
               <div class="note-content" [innerHTML]="note.content"></div>
             </div>
           </div>
-          <button class="btn-primary add-note-btn">
-            <i class="fas fa-plus"></i> Add Note
-          </button>
+          <!-- Add Note button removed, now using icon in header -->
         </div>
       </section>
     </div>

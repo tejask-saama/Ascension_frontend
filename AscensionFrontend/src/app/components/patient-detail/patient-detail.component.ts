@@ -13,6 +13,7 @@ export class PatientDetailComponent implements OnInit {
   patient: PatientDetail | null = null;
   loading = false;
   error = '';
+  activeSection: 'background' | 'assessment' | 'recommendations' | 'notes' = 'background';
   expandedSuggestions: { [key: string]: boolean } = {
     background: false,
     assessment: false,
@@ -52,12 +53,50 @@ export class PatientDetailComponent implements OnInit {
   checkForUpdates(): void {
     this.loadPatientDetails();
   }
-
+  
   toggleSuggestions(section: 'background' | 'assessment' | 'recommendations' | 'notes'): void {
     // Toggle the suggestions panel for the given section
     this.expandedSuggestions[section] = !this.expandedSuggestions[section];
   }
 
+  editSection(section: string, event: Event): void {
+    // Stop the event from propagating to the section header
+    event.stopPropagation();
+    
+    // Implement edit logic for the specific section
+    console.log(`Editing ${section} section...`);
+    
+    // You can add specific edit functionality for each section here
+    switch(section) {
+      case 'background':
+        // Edit background section
+        break;
+      case 'assessment':
+        // Edit assessment section
+        break;
+      case 'recommendations':
+        // Edit recommendations section
+        break;
+      default:
+        break;
+    }
+  }
+
+  setActiveSection(section: 'background' | 'assessment' | 'recommendations' | 'notes'): void {
+    // Set the active section
+    this.activeSection = section;
+  }
+
+  addNewNote(event: Event): void {
+    // Stop the event from propagating to the section header
+    event.stopPropagation();
+    
+    // Implement add new note functionality
+    console.log('Adding new nurse note...');
+    // Here you would typically open a modal or form to add a new note
+    // For now, we'll just log a message
+  }
+  
   openSuggestions(): void {
     // Implement suggestions functionality
     console.log('Open suggestions');

@@ -18,23 +18,23 @@
   <div class="tab-content" *ngIf="activeTab === 'today'">
     <div *ngFor="let entry of historyEntries" class="history-entry">
       <div class="entry-header">
+        <div class="section-title">{{entry.section}}</div>
         <div class="time-stamp">
           <span>{{entry.time}}</span>
           <span>by {{entry.nurse}}</span>
         </div>
-        <div class="section-title">{{entry.section}}</div>
       </div>
 
       <!-- Background Section Content -->
       <div class="entry-content" *ngIf="entry.section === 'BACKGROUND'">
-        <h3>{{entry.content.title}}</h3>
+        <div class="content-heading">{{entry.content.title}}</div>
         <p>{{entry.content.text}}</p>
       </div>
 
       <!-- Assessment Section Content -->
       <div class="entry-content" *ngIf="entry.section === 'ASSESSMENT'">
         <div class="assessment-item" *ngIf="entry.content.vitalSigns">
-          <h3>Recent vital signs:</h3>
+          <div class="content-heading">Recent vital signs:</div>
           <div class="vital-signs">
             <span>BP: {{entry.content.vitalSigns.bp}}</span>
             <span>HR: {{entry.content.vitalSigns.hr}}</span>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="assessment-item" *ngIf="entry.content.painLevel">
-          <h3>Pain level & goal:</h3>
+          <div class="content-heading">Pain level & goal:</div>
           <div>
             <strong>Current pain level:</strong> {{entry.content.painLevel.current}}
           </div>
@@ -55,47 +55,51 @@
         </div>
 
         <div class="assessment-item" *ngIf="entry.content.findings">
-          <h3>Abnormal/pertinent findings:</h3>
+          <div class="content-heading">Abnormal/pertinent findings:</div>
           <p>{{entry.content.findings}}</p>
         </div>
 
         <div class="assessment-item" *ngIf="entry.content.activity">
-          <h3>Activity:</h3>
+          <div class="content-heading">Activity:</div>
           <p>{{entry.content.activity}}</p>
         </div>
 
         <div class="assessment-item" *ngIf="entry.content.specimen">
-          <h3>Specimen:</h3>
+          <div class="content-heading">Specimen:</div>
           <p>{{entry.content.specimen}}</p>
         </div>
 
         <div class="assessment-item" *ngIf="entry.content.ivs">
-          <h3>IV's:</h3>
+          <div class="content-heading">IV's:</div>
           <p>{{entry.content.ivs}}</p>
         </div>
 
         <div class="assessment-item" *ngIf="entry.content.procedures">
-          <h3>Procedures:</h3>
+          <div class="content-heading">Procedures:</div>
           <p>{{entry.content.procedures}}</p>
         </div>
       </div>
 
       <!-- Recommendations Section Content -->
       <div class="entry-content" *ngIf="entry.section === 'RECOMMENDATIONS'">
-        <div class="recommendation-item">
-          <h3>Goal For The Shift</h3>
+        <div class="recommendation-item" *ngIf="entry.content.shiftGoal">
+          <div class="content-heading">Goal for The Shift:</div>
           <p>{{entry.content.shiftGoal}}</p>
         </div>
 
-        <div class="recommendation-item">
-          <h3>Plan For The Day</h3>
+        <div class="recommendation-item" *ngIf="entry.content.dayPlan">
+          <div class="content-heading">Plan For The Day:</div>
           <p>{{entry.content.dayPlan}}</p>
         </div>
 
-        <div class="recommendation-item">
-          <h3>Discharge Plan</h3>
-          <div><strong>Destination:</strong> {{entry.content.dischargePlan.destination}}</div>
-          <div><strong>Needs:</strong> {{entry.content.dischargePlan.needs}}</div>
+        <div class="recommendation-item" *ngIf="entry.content.dischargePlan">
+          <div class="content-heading">Discharge Plan:</div>
+          <div>
+            <strong>Destination:</strong> {{entry.content.dischargePlan.destination}}
+          </div>
+          <div>
+            <strong>Needs:</strong> {{entry.content.dischargePlan.needs}}
+          </div>
         </div>
       </div>
     </div>
